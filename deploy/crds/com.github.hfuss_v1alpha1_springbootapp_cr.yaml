@@ -1,0 +1,7 @@
+apiVersion: com.github.hfuss/v1alpha1
+kind: SpringBootApp
+metadata:
+  name: example-springbootapp
+spec:
+  # Add fields here
+  size: 3

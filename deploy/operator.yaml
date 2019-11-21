@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-boot-app-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: spring-boot-app-operator
+  template:
+    metadata:
+      labels:
+        name: spring-boot-app-operator
+    spec:
+      serviceAccountName: spring-boot-app-operator
+      containers:
+        - name: spring-boot-app-operator
+          # Replace this with the built image name
+          image: REPLACE_IMAGE
+          command:
+          - spring-boot-app-operator
+          imagePullPolicy: Always
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: "spring-boot-app-operator"
